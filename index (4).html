@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amor en el Aire</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(ellipse at bottom, #3b0a2a 0%, #1a0014 100%);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff0f5;
+  }
+
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+    animation: latido 2s infinite;
+    text-shadow: 0 0 15px rgba(255,192,203,0.6);
+    margin-bottom: 2rem;
+    max-width: 90%;
+  }
+
+  @keyframes latido {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.85; }
+  }
+
+  button {
+    padding: 12px 25px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 25px;
+    background-color: rgba(255, 182, 193, 0.2);
+    color: white;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: rgba(255, 182, 193, 0.4);
+  }
+
+  .corazon {
+    position: absolute;
+    font-size: 20px;
+    animation: subir 5s linear forwards;
+  }
+
+  @keyframes subir {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<h1 id="mensaje">Eres mi lugar favorito para quedarme 💖</h1>
+<button onclick="cambiarMensaje()">💌 Siguiente frase</button>
+
+<script>
+const mensajes = [
+  "Eres mi lugar favorito para quedarme 💖",
+  "Contigo, cada día es San Valentín 🌹",
+  "Eres mi casualidad más bonita ✨",
+  "Si tú sonríes, yo soy feliz 💕",
+  "Eres mi hoy, mi mañana y mi siempre ❤️",
+  "Tu abrazo es mi hogar 🏡💗",
+  "Eres la razón por la que creo en el amor 💫"
+];
+
+let indice = 0;
+
+function cambiarMensaje() {
+  indice++;
+  if (indice >= mensajes.length) indice = 0; // vuelve al inicio
+  document.getElementById("mensaje").textContent = mensajes[indice];
+  lanzarCorazonesOrdenados();
+}
+
+function lanzarCorazonesOrdenados() {
+  const columnas = 8; // número de columnas fijas
+  for (let i = 0; i < columnas; i++) {
+    setTimeout(() => {
+      const corazon = document.createElement("div");
+      corazon.classList.add("corazon");
+      corazon.textContent = "❤️";
+      corazon.style.left = `${(i + 1) * (100 / (columnas + 1))}vw`;
+      document.body.appendChild(corazon);
+      setTimeout(() => corazon.remove(), 5000);
+    }, i * 300); // retraso entre columnas
+  }
+}
+</script>
+
+</body>
+</html>
